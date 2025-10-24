@@ -1,0 +1,9 @@
+fastapi
+uvicorn 
+pymongo 
+pydantic 
+gspread 
+oauth2client 
+faker 
+google-genai
+python-dotenv
