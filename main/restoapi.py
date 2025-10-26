@@ -146,6 +146,62 @@ async def delete_rating(rating_id: str):
         raise HTTPException(status_code=404, detail="Rating not found")
     return {"msg": "Rating deleted"}
 
+# ---- Get all menu items ----
+@app.get("/menu/")
+async def get_menu_items():
+    items = [serialize_doc(doc) for doc in menu_collection.find()]
+    return items
+
+# ---- Get single menu item by id ----
+@app.get("/menu/{item_id}")
+async def get_menu_item(item_id: str):
+    doc = menu_collection.find_one({"_id": ObjectId(item_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Menu item not found")
+    return serialize_doc(doc)
+
+# ---- Get all customers ----
+@app.get("/customers/")
+async def get_customers():
+    items = [serialize_doc(doc) for doc in customers_collection.find()]
+    return items
+
+# ---- Get single customer by id ----
+@app.get("/customers/{cust_id}")
+async def get_customer(cust_id: str):
+    doc = customers_collection.find_one({"_id": ObjectId(cust_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Customer not found")
+    return serialize_doc(doc)
+
+# ---- Get all orders ----
+@app.get("/orders/")
+async def get_orders():
+    items = [serialize_doc(doc) for doc in orders_collection.find()]
+    return items
+
+# ---- Get single order by id ----
+@app.get("/orders/{order_id}")
+async def get_order(order_id: str):
+    doc = orders_collection.find_one({"_id": ObjectId(order_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return serialize_doc(doc)
+
+# ---- Get all ratings ----
+@app.get("/ratings/")
+async def get_ratings():
+    items = [serialize_doc(doc) for doc in ratings_collection.find()]
+    return items
+
+# ---- Get single rating by id ----
+@app.get("/ratings/{rating_id}")
+async def get_rating(rating_id: str):
+    doc = ratings_collection.find_one({"_id": ObjectId(rating_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Rating not found")
+    return serialize_doc(doc)
+
 # import uvicorn
 
 # if __name__ == "__main__":
